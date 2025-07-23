@@ -1,0 +1,73 @@
+COMANDOS FTP PARA UPLOAD NO HOSTINGER
+
+=== CONFIGURAÇÃO FTP ===
+Host: srv1887.hstgr.io (ou ftp.seudominio.com)
+Usuário: [seu_usuario_hostinger]
+Senha: [sua_senha_hostinger]
+Porta: 21
+Modo: Passivo
+
+=== COMANDOS VIA LINHA DE COMANDO ===
+
+1. Conectar:
+ftp srv1887.hstgr.io
+
+2. Navegar para public_html:
+cd public_html
+
+3. Criar estrutura de pastas:
+mkdir ajax
+mkdir assets
+mkdir assets/css
+mkdir assets/js
+mkdir config
+mkdir includes
+mkdir operations
+
+4. Upload de arquivos (exemplo):
+put index.php
+put login.php
+put register.php
+put logout.php
+put forgot-password.php
+put reset-password.php
+put health-check.php
+
+5. Upload por pasta:
+cd config
+put config/database.php
+
+cd ../includes
+put includes/auth.php
+put includes/functions.php
+put includes/header.php
+
+cd ../operations
+put operations/add-balance.php
+put operations/close-operation.php
+put operations/create-operation.php
+put operations/get-active-operations.php
+put operations/list-operations.php
+put operations/view-operation.php
+
+cd ../ajax
+put ajax/get-chart-data.php
+put ajax/register-profit.php
+
+cd ../assets/css
+put assets/css/style.css
+
+cd ../js
+put assets/js/chart.js
+put assets/js/script.js
+
+=== CLIENTES FTP RECOMENDADOS ===
+- FileZilla (gratuito)
+- WinSCP (Windows)
+- Cyberduck (Mac/Windows)
+
+=== CONFIGURAÇÕES IMPORTANTES ===
+- Tipo de transferência: Binário para arquivos, ASCII para textos
+- Codificação: UTF-8
+- Sobrescrever arquivos existentes: Sim
+- Preservar timestamps: Não obrigatório

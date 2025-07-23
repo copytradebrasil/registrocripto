@@ -1,0 +1,11 @@
+{
+    "name": "arbitragem-cripto/sistema",
+    "description": "Sistema PHP para arbitragem de criptomoedas",
+    "type": "project",
+    "require": {
+        "php": ">=8.0"
+    },
+    "scripts": {
+        "start": "php -S 0.0.0.0:5000 -t ."
+    }
+}

@@ -1,0 +1,50 @@
+LISTA COMPLETA DE ARQUIVOS PARA UPLOAD NO HOSTINGER
+
+=== ARQUIVOS PHP PRINCIPAIS ===
+- index.php (Dashboard principal)
+- login.php (Página de login)
+- register.php (Página de cadastro) 
+- logout.php (Script de logout)
+- forgot-password.php (Recuperação de senha)
+- reset-password.php (Reset de senha)
+- health-check.php (Verificação de sistema)
+
+=== PASTA CONFIG ===
+- config/database.php (Configuração do banco)
+
+=== PASTA INCLUDES ===
+- includes/auth.php (Sistema de autenticação)
+- includes/functions.php (Funções auxiliares)
+- includes/header.php (Cabeçalho padrão)
+
+=== PASTA OPERATIONS ===
+- operations/add-balance.php (Adicionar saldo)
+- operations/close-operation.php (Fechar operação)
+- operations/create-operation.php (Criar operação)
+- operations/get-active-operations.php (Buscar operações ativas)
+- operations/list-operations.php (Listar operações)
+- operations/view-operation.php (Ver detalhes da operação)
+
+=== PASTA AJAX ===
+- ajax/get-chart-data.php (Dados do gráfico)
+- ajax/register-profit.php (Registrar lucro)
+
+=== PASTA ASSETS/CSS ===
+- assets/css/style.css (Estilos principais)
+
+=== PASTA ASSETS/JS ===
+- assets/js/chart.js (Gráficos Chart.js)
+- assets/js/script.js (JavaScript principal)
+
+=== ESTRUTURA DE PASTAS NECESSÁRIA ===
+public_html/
+├── ajax/
+├── assets/
+│   ├── css/
+│   └── js/
+├── config/
+├── includes/
+├── operations/
+└── [arquivos PHP na raiz]
+
+TOTAL: Aproximadamente 18 arquivos + estrutura de pastas
