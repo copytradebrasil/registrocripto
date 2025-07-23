@@ -1,0 +1,256 @@
+## 1. **DESCRIÇÃO DO PROJETO**
+
+Desenvolva um sistema web em **PHP** completo com sistema de autenticação (login, registro, esqueci senha) para controle, registro e monitoramento de operações de arbitragem de taxa de financiamento em criptomoedas. O sistema deve:
+
+- **Sistema de Login/Registro**: Autenticação completa com recuperação de senha
+- Armazenar todos os dados de operações, trades em exchanges, fechamentos e lucros diretamente em um banco de dados MySQL
+- Registrar valores em **dólar americano (USD)**
+- Interface responsiva e intuitiva para uso pessoal
+
+### **Funcionalidades Principais:**
+1. **Sistema de Autenticação**:
+   - Registro de novos usuários
+   - Login com email/senha
+   - Recuperação de senha via email
+   - Controle de sessões
+   
+2. **Gestão de Operações**:
+   - **Entrada na Operação**: Registro de novos investimentos/posições
+   - **Registro de Lucro**: Acompanhamento de ganhos durante a operação
+   - **Saída da Operação**: Finalização e balanço final das operações
+
+## 2. **CONEXÃO COM BANCO DE DADOS MySQL (Hostinger)**
+
+### **Credenciais de Conexão:**
+```php
+<?php
+$host = 'srv1887.hstgr.io'; // ou IP: 193.203.175.199
+$username = 'u999216088_registrocripto';
+$password = 'Copytrade@2025';
+$database = 'u999216088_registrocripto';
+
+try {
+    $pdo = new PDO("mysql:host=$host;dbname=$database;charset=utf8mb4", $username, $password);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch(PDOException $e) {
+    die("Erro na conexão: " . $e->getMessage());
+}
+?>
+IMPORTANTE: As tabelas já foram criadas no banco de dados. Use PDO para todas as operações.
+
+3. ESTRUTURA DE DADOS BASEADA NA PLANILHA ANALISADA
+Tabelas Principais:
+usuarios: Sistema de autenticação
+operacoes: Operações de arbitragem
+registros_lucro: Lucros intermediários
+sessoes: Controle de sessões
+password_resets: Recuperação de senha
+Campos das Operações:
+Inicial BRL: Valor inicial em reais brasileiros
+Inicial USDT: Valor inicial em USDT/dólares
+Data Compra: Data de entrada na operação
+Moeda: Par de criptomoeda (ex: SUIUSDT)
+Campos de Lucro: Para registro de ganhos intermediários
+Campos de Saída: Para finalização da operação
+4. ESPECIFICAÇÕES TÉCNICAS
+Stack Tecnológica:
+Backend: PHP 8.x
+Frontend: HTML5, CSS3, JavaScript, Bootstrap 5
+Banco de Dados: MySQL (já configurado na Hostinger)
+Autenticação: Sessões PHP com hash de senha
+Email: PHPMailer para recuperação de senha
+Estrutura de Arquivos:
+/
+├── index.php (dashboard principal)
+├── login.php (página de login)
+├── register.php (página de registro)
+├── forgot-password.php (recuperação de senha)
+├── logout.php (logout)
+├── config/
+│   └── database.php (conexão PDO)
+├── includes/
+│   ├── header.php
+│   ├── footer.php
+│   └── auth.php (funções de autenticação)
+├── operations/
+│   ├── new-operation.php
+│   ├── add-profit.php
+│   ├── close-operation.php
+│   └── list-operations.php
+├── assets/
+│   ├── css/style.css
+│   ├── js/script.js
+│   └── img/
+└── vendor/ (PHPMailer via Composer)
+5. SISTEMA DE AUTENTICAÇÃO
+Funcionalidades de Login:
+Registro de Usuário:
+
+Nome, email, senha
+Validação de email único
+Hash da senha com password_hash()
+Login:
+
+Validação email/senha
+Criação de sessão segura
+Redirecionamento para dashboard
+Recuperação de Senha:
+
+Envio de token por email
+Página de reset com token
+Atualização segura da senha
+Segurança:
+Hash de senhas com PASSWORD_DEFAULT
+Tokens seguros para reset
+Validação de sessões
+Proteção contra SQL injection (PDO)
+Sanitização de inputs
+6. INTERFACE DO USUÁRIO
+Páginas Principais:
+Login/Registro: Formulários de autenticação
+Dashboard: Visão geral das operações ativas
+Nova Operação: Formulário para entrada de dados
+Registro de Lucros: Atualização de ganhos
+Histórico: Lista de operações finalizadas
+Relatórios: Resumos e estatísticas
+Formulários de Operações:
+Entrada na Operação:
+Valor Inicial BRL
+Valor Inicial USDT
+Data da Operação
+Par de Criptomoeda
+Observações (opcional)
+Registro de Lucro:
+Seleção da operação ativa
+Valor do lucro
+Data do registro
+Tipo de lucro (diário, semanal, etc.)
+Saída da Operação:
+Seleção da operação
+Valor final
+Data de saída
+Lucro total calculado
+7. FUNCIONALIDADES ESPECÍFICAS
+Cálculos Automáticos:
+Conversão BRL ↔ USD
+Cálculo de ROI (Return on Investment)
+Percentual de lucro sobre investimento inicial
+Tempo total da operação
+Validações:
+Autenticação em todas as páginas protegidas
+Valores monetários sempre positivos
+Datas não podem ser futuras
+Pares de criptomoedas em formato válido
+Campos obrigatórios preenchidos
+Recursos Adicionais:
+Filtros por data, moeda, status
+Paginação de resultados
+Gráficos simples de performance
+Logout automático por inatividade
+8. IMPLEMENTAÇÃO PASSO A PASSO
+Fase 1 - Setup e Autenticação:
+Configure a conexão PDO com MySQL
+Crie sistema de registro de usuários
+Implemente login com validação
+Desenvolva recuperação de senha
+Configure controle de sessões
+Fase 2 - CRUD de Operações:
+Dashboard com operações do usuário logado
+Formulário de nova operação
+Sistema de registro de lucros
+Finalização de operações
+Histórico e relatórios
+Fase 3 - Interface e UX:
+Design responsivo com Bootstrap
+Validações JavaScript
+Feedback visual para ações
+Navegação intuitiva
+Fase 4 - Refinamentos:
+Otimização de consultas
+Tratamento de erros
+Logs de auditoria
+Testes de segurança
+9. EXEMPLO DE CÓDIGO INICIAL
+config/database.php:
+<?php
+$host = 'srv1887.hstgr.io';
+$username = 'u999216088_registrocripto';
+$password = 'Copytrade@2025';
+$database = 'u999216088_registrocripto';
+
+try {
+    $pdo = new PDO("mysql:host=$host;dbname=$database;charset=utf8mb4", $username, $password);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch(PDOException $e) {
+    die("Erro na conexão: " . $e->getMessage());
+}
+?>
+includes/auth.php:
+<?php
+session_start();
+
+function isLoggedIn() {
+    return isset($_SESSION['user_id']);
+}
+
+function requireLogin() {
+    if (!isLoggedIn()) {
+        header('Location: login.php');
+        exit;
+    }
+}
+
+function login($email, $password, $pdo) {
+    $stmt = $pdo->prepare("SELECT id, nome, senha FROM usuarios WHERE email = ? AND status = 'ativo'");
+    $stmt->execute([$email]);
+    $user = $stmt->fetch();
+    
+    if ($user && password_verify($password, $user['senha'])) {
+        $_SESSION['user_id'] = $user['id'];
+        $_SESSION['user_name'] = $user['nome'];
+        return true;
+    }
+    return false;
+}
+?>
+index.php (Dashboard):
+<?php
+require_once 'config/database.php';
+require_once 'includes/auth.php';
+requireLogin();
+
+// Buscar operações do usuário
+$stmt = $pdo->prepare("SELECT * FROM operacoes WHERE usuario_id = ? ORDER BY data_inicio DESC");
+$stmt->execute([$_SESSION['user_id']]);
+$operacoes = $stmt->fetchAll();
+?>
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Arbitragem Cripto</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Interface do dashboard aqui -->
+</body>
+</html>
+10. CONSIDERAÇÕES DE SEGURANÇA
+Hash de senhas com password_hash()
+Validação e sanitização de todos os inputs
+Proteção contra SQL injection usando PDO
+Controle de sessões seguro
+Tokens CSRF em formulários
+Logout por inatividade
+INSTRUÇÕES FINAIS PARA O REPLIT AI:
+
+Implemente TODAS as funcionalidades descritas
+Use as credenciais MySQL fornecidas
+Crie sistema completo de autenticação
+Mantenha o código limpo e bem comentado
+Use Bootstrap para interface responsiva
+Teste todas as operações CRUD
+Garanta segurança em todas as operações
+Foque na usabilidade para controle financeiro pessoal
